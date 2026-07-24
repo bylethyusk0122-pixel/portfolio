@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TORQX ONE 広告バナー 3サイズ展開 ｜ 制作サンプル</title>
+<meta name="description" content="架空商品 TORQX ONE の広告バナー3サイズ展開（1200×628 / 1080×1080 / 1080×1920）。LPと同一ブランドで統一制作したポートフォリオサンプル。">
+<style>
+/* Hallmark · derivative: TORQX brand banner set · tone: dark / technical / bold · anchor hue: amber 75
+ * artboards: 1200x628 (X/FB) · 1080x1080 (square) · 1080x1920 (story) — displayed scaled, true-size DOM
+ */
+:root{
+  --bg:oklch(15% 0.012 260);
+  --bg-2:oklch(19% 0.014 260);
+  --panel:oklch(21% 0.014 260);
+  --ink:oklch(95% 0.005 90);
+  --ink-soft:oklch(76% 0.010 250);
+  --ink-faint:oklch(58% 0.012 250);
+  --line:oklch(32% 0.014 255);
+  --accent:oklch(80% 0.155 75);
+  --accent-deep:oklch(70% 0.150 68);
+  --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
+  --num:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:"Consolas","SF Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;padding:48px 24px 96px}
+h1{font-size:clamp(1.3rem,3vw,2rem);font-weight:800;letter-spacing:.04em}
+.head{max-width:1100px;margin:0 auto 12px}
+.head .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;color:var(--accent);text-transform:uppercase}
+.head p{color:var(--ink-faint);font-size:.85rem;margin-top:8px;max-width:60ch}
+.gallery{max-width:1100px;margin:48px auto 0;display:grid;gap:64px}
+.piece .meta{display:flex;align-items:baseline;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.piece .meta .size{font-family:var(--num);font-weight:900;font-size:1.1rem;color:var(--accent)}
+.piece .meta .use{font-size:.8rem;color:var(--ink-faint)}
+.stage{border:1px solid var(--line);border-radius:12px;background:var(--bg-2);padding:32px;display:grid;place-items:center;overflow:auto}
+
+/* ------- artboard scaling ------- */
+.fit{transform-origin:top left}
+.fit-wrap{overflow:hidden}
+
+/* ================= shared banner bits ================= */
+.board{position:relative;overflow:hidden;background:var(--bg);font-family:var(--sans);flex:none}
+.board .logo{font-family:var(--num);font-weight:900;letter-spacing:.14em;color:var(--ink)}
+.board .logo b{color:var(--accent)}
+.board .photo{position:absolute;background:url("../torqx-driver/img/hero.png") center/contain no-repeat}
+.board .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,oklch(80% 0.155 75/.22),transparent 65%);filter:blur(6px)}
+.board .chip{display:inline-block;font-family:var(--mono);letter-spacing:.14em;color:var(--accent);border:2px solid oklch(80% 0.155 75/.5);border-radius:6px}
+.board .cta{display:inline-block;font-weight:800;background:var(--accent);color:oklch(18% 0.02 75);border-radius:8px;letter-spacing:.06em}
+.board .grad{position:absolute;inset:0;pointer-events:none}
+
+/* ================= 1200x628 ================= */
+.b-wide{width:1200px;height:628px}
+.b-wide .grad{background:
+  radial-gradient(55% 90% at 88% 40%,oklch(80% 0.155 75/.12),transparent 60%),
+  linear-gradient(100deg,var(--bg) 46%,transparent 70%)}
+.b-wide .photo{right:-20px;top:-60px;width:560px;height:748px}
+.b-wide .glow{right:60px;top:60px;width:420px;height:420px}
+.b-wide .copy{position:absolute;left:72px;top:50%;transform:translateY(-50%);z-index:2;max-width:560px}
+.b-wide .logo{font-size:28px}
+.b-wide h2{font-size:64px;font-weight:800;line-height:1.25;letter-spacing:.02em;margin:24px 0 20px}
+.b-wide h2 .amber{color:var(--accent)}
+.b-wide .sub{font-size:22px;color:var(--ink-soft);letter-spacing:.04em}
+.b-wide .row{display:flex;align-items:center;gap:24px;margin-top:36px}
+.b-wide .cta{font-size:22px;padding:16px 36px}
+.b-wide .price{font-family:var(--num);font-weight:900;font-size:26px}
+.b-wide .price small{display:block;font-size:12px;color:var(--ink-faint);font-weight:400}
+
+/* ================= 1080x1080 ================= */
+.b-sq{width:1080px;height:1080px}
+.b-sq .grad{background:radial-gradient(70% 55% at 50% 62%,oklch(80% 0.155 75/.14),transparent 65%)}
+.b-sq .photo{left:50%;top:56%;transform:translate(-50%,-50%);width:640px;height:800px}
+.b-sq .glow{left:50%;top:56%;transform:translate(-50%,-50%);width:640px;height:640px}
+.b-sq .top{position:absolute;top:72px;left:0;right:0;text-align:center;z-index:2}
+.b-sq .logo{font-size:30px}
+.b-sq h2{font-size:72px;font-weight:800;line-height:1.3;letter-spacing:.03em;margin-top:20px}
+.b-sq h2 .amber{color:var(--accent)}
+.b-sq .bottom{position:absolute;bottom:72px;left:0;right:0;display:flex;justify-content:center;gap:20px;z-index:2}
+.b-sq .chip{font-size:20px;padding:10px 24px;background:oklch(15% 0.012 260/.7);backdrop-filter:blur(4px)}
+
+/* ================= 1080x1920 ================= */
+.b-story{width:1080px;height:1920px}
+.b-story .grad{background:
+  radial-gradient(80% 40% at 50% 52%,oklch(80% 0.155 75/.15),transparent 65%),
+  linear-gradient(oklch(15% 0.012 260/.9) 0%,transparent 22%,transparent 74%,oklch(15% 0.012 260/.94) 92%)}
+.b-story .photo{left:50%;top:50%;transform:translate(-50%,-50%);width:860px;height:1076px}
+.b-story .glow{left:50%;top:50%;transform:translate(-50%,-50%);width:780px;height:780px}
+.b-story .top{position:absolute;top:140px;left:0;right:0;text-align:center;z-index:2}
+.b-story .logo{font-size:36px}
+.b-story h2{font-size:88px;font-weight:800;line-height:1.35;letter-spacing:.03em;margin-top:28px}
+.b-story h2 .amber{color:var(--accent)}
+.b-story .bottom{position:absolute;bottom:150px;left:0;right:0;text-align:center;z-index:2}
+.b-story .cta{font-size:34px;padding:26px 72px;border-radius:999px}
+.b-story .note{margin-top:28px;font-size:22px;color:var(--ink-faint);letter-spacing:.08em}
+
+.foot-note{max-width:1100px;margin:72px auto 0;font-size:.72rem;color:var(--ink-faint);line-height:2;border-top:1px solid var(--line);padding-top:24px}
+.sample-flag{display:inline-block;background:var(--panel);color:var(--ink-soft);font-size:.68rem;letter-spacing:.1em;padding:.4em 1em;border-radius:999px;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <span class="eyebrow">Banner Set — Portfolio Sample</span>
+  <h1>TORQX ONE 広告バナー 3サイズ展開</h1>
+  <p>同一ブランドのLPと世界観を統一した広告クリエイティブ。X/Facebook広告・SNSフィード・ストーリーズの3面に、1つのキービジュアルを最適配置しています。</p>
+</div>
+
+<div class="gallery">
+
+  <div class="piece">
+    <div class="meta"><span class="size">1200 × 628</span><span class="use">X / Facebook 広告・OGP</span></div>
+    <div class="stage">
+      <div class="fit-wrap" data-w="1200" data-h="628">
+        <div class="fit">
+          <div class="board b-wide">
+            <div class="glow"></div>
+            <div class="photo"></div>
+            <div class="grad"></div>
+            <div class="copy">
+              <div class="logo">TORQ<b>X</b></div>
+              <h2>締めすぎない。<br><span class="amber">舐めさせない。</span></h2>
+              <div class="sub">12段トルク制御の電動精密ドライバー</div>
+              <div class="row">
+                <span class="cta">先行予約 受付中 →</span>
+                <span class="price">¥12,800<small>税込・送料無料</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="piece">
+    <div class="meta"><span class="size">1080 × 1080</span><span class="use">Instagram / X フィード</span></div>
+    <div class="stage">
+      <div class="fit-wrap" data-w="1080" data-h="1080">
+        <div class="fit">
+          <div class="board b-sq">
+            <div class="glow"></div>
+            <div class="photo"></div>
+            <div class="grad"></div>
+            <div class="top">
+              <div class="logo">TORQ<b>X</b></div>
+              <h2>ネジを壊さない、<br><span class="amber">という性能。</span></h2>
+            </div>
+            <div class="bottom">
+              <span class="chip">MAX 0.6 N・m</span>
+              <span class="chip">56 BITS</span>
+              <span class="chip">USB-C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="piece">
+    <div class="meta"><span class="size">1080 × 1920</span><span class="use">Instagram / LINE ストーリーズ</span></div>
+    <div class="stage">
+      <div class="fit-wrap" data-w="1080" data-h="1920">
+        <div class="fit">
+          <div class="board b-story">
+            <div class="glow"></div>
+            <div class="photo"></div>
+            <div class="grad"></div>
+            <div class="top">
+              <div class="logo">TORQ<b>X</b></div>
+              <h2>手のひらに、<br><span class="amber">整備場の本気を。</span></h2>
+            </div>
+            <div class="bottom">
+              <span class="cta">先行予約する</span>
+              <div class="note">先行価格 ¥12,800（税込）・全国送料無料</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot-note">
+  <span class="sample-flag">PORTFOLIO SAMPLE</span><br>
+  ※ 架空商品「TORQX ONE」の自主制作サンプルです。実在の企業・商品・価格とは一切関係ありません。バナーはHTML/CSSで原寸制作しており、各サイズの実データ（PNG）としても書き出し可能です。商品ビジュアルはAI生成によるオリジナル。<br>
+  © TORQX（架空） — Design &amp; Build Sample.
+</div>
+
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.fit-wrap').forEach(function(w){
+      var bw=+w.dataset.w, bh=+w.dataset.h;
+      var avail=Math.min(w.parentElement.clientWidth-0, 960);
+      var k=Math.min(avail/bw, 1);
+      // cap story height for comfortable browsing
+      if(bh>1200) k=Math.min(k, 640/bh*1.2);
+      var f=w.querySelector('.fit');
+      f.style.transform='scale('+k+')';
+      w.style.width=(bw*k)+'px';
+      w.style.height=(bh*k)+'px';
+    });
+  }
+  fit();
+  addEventListener('resize',fit);
+})();
+</script>
+</body>
+</html>

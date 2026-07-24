@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>制作ポートフォリオ ｜ LP・バナー・Webツール制作</title>
+<meta name="description" content="AI活用で高速に、手で丁寧に仕上げるWeb制作。LP・広告バナー・Web見積もりツールの自主制作サンプル4点を掲載しています。">
+<style>
+/* Hallmark · macrostructure: Catalogue (portfolio hub) · tone: neutral / editorial / honest · anchor hue: ink-blue 255
+ * pre-emit critique: P4 H5 E4 S4 R5 V4
+ * theme: custom "Hub" — warm white paper · near-black ink · ink-blue accent · Yu Gothic + Yu Mincho display
+ */
+:root{
+  --paper:oklch(98% 0.003 90);
+  --paper-2:oklch(95.5% 0.005 90);
+  --ink:oklch(24% 0.01 260);
+  --ink-soft:oklch(42% 0.012 260);
+  --ink-faint:oklch(58% 0.012 260);
+  --line:oklch(88% 0.006 90);
+  --accent:oklch(48% 0.10 255);
+  --serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;
+  --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+  --num:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --wrap:1000px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s-5)}
+
+.hero{padding-block:var(--s-9) var(--s-8);border-bottom:1px solid var(--line)}
+.hero .eyebrow{font-family:var(--num);font-size:.72rem;letter-spacing:.3em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.45;letter-spacing:.05em;margin-top:var(--s-4)}
+.hero p{color:var(--ink-soft);margin-top:var(--s-5);max-width:56ch}
+.hero .pts{display:flex;gap:var(--s-5);flex-wrap:wrap;margin-top:var(--s-6)}
+.hero .pt{font-size:.82rem;color:var(--ink-soft);border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5em 1.3em}
+
+.works{padding-block:var(--s-8)}
+.works h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-2)}
+.works .sub{color:var(--ink-faint);font-size:.85rem;margin-bottom:var(--s-7)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6)}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px oklch(24% 0.01 260/.10)}
+.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.thumb{height:170px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb .big{font-weight:800;letter-spacing:.1em}
+/* per-work thumb identities */
+.t-yohaku{background:linear-gradient(150deg,oklch(97.5% 0.010 78),oklch(92% 0.018 70))}
+.t-yohaku .big{font-family:var(--serif);font-size:2.2rem;color:oklch(26% 0.02 55);letter-spacing:.3em;padding-left:.3em}
+.t-yohaku .acc{position:absolute;bottom:0;left:0;right:0;height:5px;background:oklch(56% 0.135 45)}
+.t-torqx{background:radial-gradient(80% 120% at 70% 20%,oklch(24% 0.016 258),oklch(15% 0.012 260))}
+.t-torqx .big{font-family:var(--num);font-size:1.9rem;color:#fff;letter-spacing:.16em}
+.t-torqx .big b{color:oklch(80% 0.155 75)}
+.t-torqx .ring{position:absolute;width:190px;height:14px;border-radius:999px;background:linear-gradient(90deg,transparent,oklch(80% 0.155 75/.7),transparent);bottom:38px;filter:blur(3px)}
+.t-banner{background:oklch(19% 0.014 260);gap:10px}
+.t-banner .mini{border:1px solid oklch(80% 0.155 75/.5);border-radius:4px;background:oklch(24% 0.016 258)}
+.t-banner .m1{width:84px;height:44px}
+.t-banner .m2{width:56px;height:56px}
+.t-banner .m3{width:36px;height:64px}
+.t-migaki{background:linear-gradient(150deg,oklch(98.5% 0.004 200),oklch(93% 0.02 195))}
+.t-migaki .calc{background:#fff;border:1px solid oklch(88% 0.01 200);border-radius:10px;padding:10px 18px;box-shadow:0 8px 20px oklch(50% 0.05 210/.15);font-family:var(--num)}
+.t-migaki .calc .l{font-size:.6rem;color:oklch(60% 0.015 230)}
+.t-migaki .calc .v{font-weight:900;font-size:1.3rem;color:oklch(50% 0.10 200)}
+
+.body{padding:var(--s-5) var(--s-5) var(--s-6);display:flex;flex-direction:column;flex:1}
+.tags{display:flex;gap:var(--s-2);flex-wrap:wrap;margin-bottom:var(--s-3)}
+.tag{font-family:var(--num);font-size:.64rem;font-weight:700;letter-spacing:.08em;color:var(--accent);border:1px solid oklch(48% 0.10 255/.3);border-radius:4px;padding:.2em .7em}
+.card h3{font-size:1.1rem;font-weight:800;letter-spacing:.04em}
+.card .desc{font-size:.85rem;color:var(--ink-soft);margin-top:var(--s-3);flex:1}
+.card .go{margin-top:var(--s-4);font-size:.84rem;font-weight:800;color:var(--accent);letter-spacing:.06em}
+.card:hover .go{text-decoration:underline;text-underline-offset:4px}
+
+.about{background:var(--paper-2);border-block:1px solid var(--line);padding-block:var(--s-8)}
+.about h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-6)}
+.ab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-6)}
+@media(max-width:760px){.ab-grid{grid-template-columns:1fr}}
+.ab h3{font-size:.95rem;font-weight:800;margin-bottom:var(--s-3);padding-left:.9em;position:relative}
+.ab h3::before{content:"";position:absolute;left:0;top:.35em;width:3px;height:1em;background:var(--accent)}
+.ab p{font-size:.85rem;color:var(--ink-soft)}
+
+.foot{padding-block:var(--s-7)}
+.foot .wrap{font-size:.72rem;color:var(--ink-faint);line-height:2}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Portfolio — Web Design &amp; Build</span>
+    <h1>AIで速く、手で丁寧に。<br>設計から実装まで、一人で完結します。</h1>
+    <p>LP・広告バナー・Web見積もりツールの自主制作サンプルです。デザイン・コーディング・コピーライティング・料金ロジックの実装まで、すべて一人で制作しました。AI活用により、品質を落とさず短納期でお届けできます。</p>
+    <div class="pts">
+      <span class="pt">デザイン × コーディング両対応</span>
+      <span class="pt">スマホ完全対応</span>
+      <span class="pt">コピーもお任せOK</span>
+    </div>
+  </div>
+</header>
+
+<section class="works">
+  <div class="wrap">
+    <h2>制作サンプル</h2>
+    <p class="sub">すべて架空ブランドの自主制作です。実案件と同じ工程（企画→設計→デザイン→実装→検証）で制作しています。</p>
+    <div class="grid">
+
+      <a class="card" href="yohaku-coffee/">
+        <div class="thumb t-yohaku"><span class="big">余白</span><span class="acc"></span></div>
+        <div class="body">
+          <div class="tags"><span class="tag">LP</span><span class="tag">D2C・定期便</span><span class="tag">和モダン</span></div>
+          <h3>コーヒー定期便「余白」ランディングページ</h3>
+          <p class="desc">タイポグラフィと余白で高級感をつくる和モダンLP。画像素材ゼロ（湯気の立つカップもCSSのみで描画）・システムフォントで表示も高速。</p>
+          <span class="go">サンプルを見る →</span>
+        </div>
+      </a>
+
+      <a class="card" href="torqx-driver/">
+        <div class="thumb t-torqx"><div class="ring"></div><span class="big">TORQ<b>X</b></span></div>
+        <div class="body">
+          <div class="tags"><span class="tag">LP</span><span class="tag">EC・ガジェット</span><span class="tag">AIビジュアル</span></div>
+          <h3>電動精密ドライバー「TORQX ONE」商品LP</h3>
+          <p class="desc">黒×金属質感の物販LP。商品写真はAI生成によるオリジナル、比較表・スペック訴求・固定購入バーなど売れるLPの定石を実装。</p>
+          <span class="go">サンプルを見る →</span>
+        </div>
+      </a>
+
+      <a class="card" href="torqx-banners/">
+        <div class="thumb t-banner"><span class="mini m1"></span><span class="mini m2"></span><span class="mini m3"></span></div>
+        <div class="body">
+          <div class="tags"><span class="tag">バナー</span><span class="tag">広告3サイズ</span><span class="tag">ブランド統一</span></div>
+          <h3>TORQX 広告バナー 3サイズ展開</h3>
+          <p class="desc">同一ブランドのLPと世界観を統一した広告クリエイティブ。X/FB広告・フィード・ストーリーズの3面に1つのキービジュアルを最適配置。</p>
+          <span class="go">サンプルを見る →</span>
+        </div>
+      </a>
+
+      <a class="card" href="migakiya-estimator/">
+        <div class="thumb t-migaki"><div class="calc"><div class="l">合計（税込）</div><div class="v">¥43,890</div></div></div>
+        <div class="body">
+          <div class="tags"><span class="tag">Webツール</span><span class="tag">料金計算</span><span class="tag">JavaScript</span></div>
+          <h3>ハウスクリーニング料金シミュレーター</h3>
+          <p class="desc">選ぶだけでその場で料金がわかる見積もりツール。数量・オプション・セット割引を含む料金ロジックをリアルタイム計算。実際に操作できます。</p>
+          <span class="go">触ってみる →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <h2>できること</h2>
+    <div class="ab-grid">
+      <div class="ab">
+        <h3>LP・Webページ制作</h3>
+        <p>企画・構成・コピー・デザイン・コーディングまで一括対応。「文章と素材がない」状態からでもご相談いただけます。</p>
+      </div>
+      <div class="ab">
+        <h3>バナー・ビジュアル制作</h3>
+        <p>広告バナーの複数サイズ展開、AI生成を活用した商品・イメージビジュアルの制作。LPとの世界観統一もお任せください。</p>
+      </div>
+      <div class="ab">
+        <h3>Webツール・自動化</h3>
+        <p>料金シミュレーター、診断フォーム、業務の自動化スクリプトなど。「毎回手作業でやっていること」をツール化します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    掲載サンプルはすべて架空ブランドの自主制作であり、実在の企業・商品・サービスとは関係ありません。<br>
+    © 2026 Web Design &amp; Build Portfolio.
+  </div>
+</footer>
+
+</body>
+</html>

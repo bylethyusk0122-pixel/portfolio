@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>みがきや ｜ ハウスクリーニング料金シミュレーター</title>
+<meta name="description" content="サービスを選ぶだけで、その場で料金がわかる。ハウスクリーニング「みがきや」のWeb見積もりシミュレーター（制作サンプル）。">
+<style>
+/* Hallmark · macrostructure: Workbench (tool) · tone: light / clean / trustworthy · anchor hue: teal 195
+ * pre-emit critique: P4 H5 E5 S4 R5 V5
+ * theme: custom "Migaki" — white paper · slate ink · teal accent · Yu Gothic
+ * differs from previous (Gunmetal): paper dark→light · accent amber→teal · genre product-LP→tool (all axes)
+ * logic: rule-based deterministic pricing (qty × unit + options, set discount 2=5% / 3+=10%)
+ */
+
+:root{
+  --paper:oklch(98.5% 0.004 200);
+  --paper-2:oklch(96% 0.008 200);
+  --card:#fff;
+  --ink:oklch(28% 0.02 230);
+  --ink-soft:oklch(45% 0.02 230);
+  --ink-faint:oklch(60% 0.015 230);
+  --line:oklch(90% 0.008 210);
+  --accent:oklch(62% 0.11 195);
+  --accent-deep:oklch(50% 0.10 200);
+  --accent-pale:oklch(95% 0.025 195);
+  --ok:oklch(62% 0.13 155);
+  --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
+  --num:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --wrap:1080px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.8;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:800;font-style:normal;line-height:1.4;overflow-wrap:anywhere;min-width:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s-5)}
+
+/* header */
+.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:var(--s-4)}
+.brand{font-weight:800;font-size:1.2rem;letter-spacing:.2em;display:flex;align-items:center;gap:.5em}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));display:grid;place-items:center;color:#fff;font-size:.9rem;font-family:var(--num);font-weight:900}
+.top-note{font-size:.76rem;color:var(--ink-faint)}
+@media(max-width:600px){.top-note{display:none}}
+
+/* intro */
+.intro{padding-block:var(--s-7) var(--s-6);text-align:center}
+.intro .eyebrow{font-size:.72rem;letter-spacing:.3em;color:var(--accent-deep);font-weight:700;text-transform:uppercase}
+.intro h1{font-size:clamp(1.5rem,4vw,2.4rem);margin-top:var(--s-3)}
+.intro p{color:var(--ink-soft);margin-top:var(--s-3);font-size:.95rem}
+
+/* layout */
+.sim{display:grid;grid-template-columns:1fr 340px;gap:var(--s-6);align-items:start;padding-bottom:140px}
+@media(max-width:900px){.sim{grid-template-columns:1fr}}
+
+/* service cards */
+.group{margin-bottom:var(--s-7)}
+.group>h2{font-size:1.05rem;letter-spacing:.06em;display:flex;align-items:center;gap:.6em;margin-bottom:var(--s-4)}
+.group>h2 .step{font-family:var(--num);font-weight:900;font-size:.72rem;background:var(--accent);color:#fff;border-radius:999px;padding:.25em .9em;letter-spacing:.1em}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+@media(max-width:640px){.cards{grid-template-columns:1fr}}
+.svc{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:var(--s-5);cursor:pointer;transition:border-color .2s var(--ease-out),box-shadow .2s var(--ease-out);position:relative}
+.svc:hover{border-color:oklch(62% 0.11 195/.5)}
+.svc.on{border-color:var(--accent);box-shadow:0 6px 20px oklch(62% 0.11 195/.14)}
+.svc:focus-visible{outline:3px solid var(--accent-deep);outline-offset:2px}
+.svc .head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3)}
+.svc h3{font-size:1rem}
+.svc .price{font-family:var(--num);font-weight:800;font-size:1.05rem;color:var(--accent-deep);white-space:nowrap}
+.svc .desc{font-size:.8rem;color:var(--ink-faint);margin-top:var(--s-2)}
+.svc .check{position:absolute;top:-10px;right:-8px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:none;place-items:center;font-size:.8rem;font-weight:900}
+.svc.on .check{display:grid}
+.qty{display:none;align-items:center;gap:var(--s-3);margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px dashed var(--line)}
+.svc.on .qty{display:flex}
+.qty label{font-size:.78rem;color:var(--ink-soft)}
+.qty button{width:34px;height:34px;border-radius:8px;border:2px solid var(--line);background:var(--card);font-size:1.1rem;font-weight:800;color:var(--accent-deep);cursor:pointer;transition:border-color .2s,background .2s}
+.qty button:hover{border-color:var(--accent);background:var(--accent-pale)}
+.qty button:focus-visible{outline:3px solid var(--accent-deep);outline-offset:2px}
+.qty button:disabled{opacity:.35;cursor:default}
+.qty .n{font-family:var(--num);font-weight:900;font-size:1.15rem;min-width:2ch;text-align:center}
+
+/* options */
+.opt{display:flex;align-items:center;gap:var(--s-4);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:var(--s-4) var(--s-5);cursor:pointer;transition:border-color .2s;margin-bottom:var(--s-3)}
+.opt:hover{border-color:oklch(62% 0.11 195/.5)}
+.opt.on{border-color:var(--accent)}
+.opt:focus-visible{outline:3px solid var(--accent-deep);outline-offset:2px}
+.opt .box{width:22px;height:22px;border-radius:6px;border:2px solid var(--line);display:grid;place-items:center;color:#fff;font-size:.7rem;font-weight:900;flex:none;transition:background .2s,border-color .2s}
+.opt.on .box{background:var(--accent);border-color:var(--accent)}
+.opt .t{flex:1;font-size:.9rem;font-weight:700}
+.opt .t small{display:block;font-weight:400;font-size:.76rem;color:var(--ink-faint)}
+.opt .p{font-family:var(--num);font-weight:800;color:var(--accent-deep);font-size:.95rem;white-space:nowrap}
+
+/* summary */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:var(--s-6) var(--s-5);position:sticky;top:84px;box-shadow:0 10px 30px oklch(28% 0.02 230/.06)}
+.panel h2{font-size:.95rem;letter-spacing:.1em;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:var(--s-3);margin-bottom:var(--s-4)}
+.lines{display:grid;gap:var(--s-3);min-height:48px}
+.lines .empty{font-size:.82rem;color:var(--ink-faint)}
+.line{display:flex;justify-content:space-between;gap:var(--s-3);font-size:.85rem}
+.line .nm{color:var(--ink-soft)}
+.line .v{font-family:var(--num);font-weight:700;white-space:nowrap}
+.line.disc .nm,.line.disc .v{color:var(--ok);font-weight:800}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--ink);margin-top:var(--s-5);padding-top:var(--s-4)}
+.total .l{font-size:.85rem;font-weight:800;letter-spacing:.08em}
+.total .v{font-family:var(--num);font-weight:900;font-size:2rem;color:var(--accent-deep)}
+.total .v small{font-size:.5em;color:var(--ink-soft);font-weight:700}
+.time{margin-top:var(--s-3);font-size:.78rem;color:var(--ink-faint);text-align:right}
+.panel .cta{display:block;text-align:center;margin-top:var(--s-5);background:var(--accent);color:#fff;font-weight:800;font-size:.95rem;letter-spacing:.06em;padding:.95em;border-radius:10px;border:none;width:100%;cursor:pointer;transition:background .25s,transform .25s;box-shadow:0 6px 18px oklch(62% 0.11 195/.3)}
+.panel .cta:hover{background:var(--accent-deep);transform:translateY(-2px)}
+.panel .cta:active{transform:none}
+.panel .cta:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.panel .note{margin-top:var(--s-3);font-size:.72rem;color:var(--ink-faint);text-align:center}
+
+/* mobile bottom bar */
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:oklch(100% 0 0/.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:var(--s-3) var(--s-5)}
+.mbar .in{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);max-width:var(--wrap);margin-inline:auto}
+.mbar .v{font-family:var(--num);font-weight:900;font-size:1.4rem;color:var(--accent-deep)}
+.mbar .v small{font-size:.55em;color:var(--ink-soft)}
+.mbar .go{background:var(--accent);color:#fff;font-weight:800;font-size:.85rem;padding:.8em 1.6em;border-radius:10px;border:none;white-space:nowrap}
+@media(max-width:900px){.mbar{display:block}.panel{position:static}}
+
+/* toast (silent success) */
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--ink);color:#fff;font-size:.85rem;padding:.8em 1.6em;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:60}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* footer */
+.foot{border-top:1px solid var(--line);background:var(--paper-2);padding-block:var(--s-6);margin-top:var(--s-8)}
+.foot .wrap{font-size:.72rem;color:var(--ink-faint);line-height:2}
+.sample-flag{display:inline-block;background:var(--card);border:1px solid var(--line);color:var(--ink-soft);font-size:.68rem;letter-spacing:.1em;padding:.4em 1em;border-radius:999px;margin-bottom:var(--s-2)}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="brand"><span class="mark">み</span>みがきや</div>
+    <div class="top-note">ハウスクリーニング料金シミュレーター</div>
+  </div>
+</div>
+
+<div class="intro wrap">
+  <span class="eyebrow">Price Simulator</span>
+  <h1>選ぶだけで、その場で料金がわかる。</h1>
+  <p>お問い合わせ不要。サービスを選ぶと、合計金額と作業時間の目安がリアルタイムで表示されます。</p>
+</div>
+
+<div class="wrap sim">
+  <div>
+    <div class="group">
+      <h2><span class="step">STEP 1</span>サービスを選ぶ（複数OK）</h2>
+      <div class="cards" id="svcCards"></div>
+    </div>
+    <div class="group">
+      <h2><span class="step">STEP 2</span>オプションを追加</h2>
+      <div id="optList"></div>
+    </div>
+  </div>
+
+  <aside class="panel" aria-live="polite">
+    <h2>お見積もり内容</h2>
+    <div class="lines" id="lines"><div class="empty">サービスを選択すると、ここに内訳が表示されます。</div></div>
+    <div class="total"><span class="l">合計（税込）</span><span class="v" id="total">¥0<small></small></span></div>
+    <div class="time" id="time"></div>
+    <button class="cta" id="ctaBtn" type="button">この内容で見積もり依頼 →</button>
+    <p class="note">※ 依頼確定ではありません。正式見積もりを無料でお送りします。</p>
+  </aside>
+</div>
+
+<div class="mbar">
+  <div class="in">
+    <div><div style="font-size:.68rem;color:var(--ink-faint)">合計（税込）</div><span class="v" id="mTotal">¥0</span></div>
+    <button class="go" id="mCta" type="button">見積もり依頼 →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status">お見積もり内容を受け付けました（サンプルのため送信はされません）</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="sample-flag">PORTFOLIO SAMPLE</span><br>
+    ※ 本ページは架空サービス「みがきや」の自主制作サンプルです。実在の企業・サービス・価格とは一切関係ありません。Web見積もりツール制作の実力提示を目的に、設計・デザイン・料金ロジック実装（JavaScript）をすべてオリジナルで制作しています。<br>
+    © みがきや（架空） — Design &amp; Build Sample.
+  </div>
+</footer>
+
+<script>
+// ---- 料金マスタ（ルールベース・決定的ロジック）----
+var SERVICES = [
+  {id:"aircon",  name:"エアコンクリーニング",   unit:"台", price:11000, min:1, max:5, time:90,  desc:"壁掛け型・分解高圧洗浄。防カビ仕上げ標準"},
+  {id:"kitchen", name:"キッチンまるごと",       unit:"式", price:16500, min:1, max:1, time:150, desc:"シンク・コンロ・壁面・収納表面まで"},
+  {id:"range",   name:"レンジフード分解洗浄",   unit:"台", price:13200, min:1, max:2, time:120, desc:"フィルター・ファンまで分解して油を除去"},
+  {id:"bath",    name:"浴室クリーニング",       unit:"式", price:14300, min:1, max:2, time:120, desc:"カビ・水アカ・鏡のウロコ取りまで"},
+  {id:"toilet",  name:"トイレ",                 unit:"箇所", price:8800, min:1, max:3, time:60, desc:"便器・床・壁・換気口の除菌清掃"},
+  {id:"window",  name:"窓・サッシ",             unit:"箇所", price:6600, min:1, max:8, time:45, desc:"ガラス両面・サッシレール・網戸"}
+];
+var OPTIONS = [
+  {id:"mold",   name:"防カビコート",        note:"浴室・エアコンの仕上げに", price:3300},
+  {id:"coatK",  name:"キッチン撥水コート",  note:"シンク・コンロ周りの汚れ防止", price:4400},
+  {id:"empty",  name:"空室・引っ越し前後",  note:"家具なしのお部屋は作業がスムーズ", price:-2200},
+  {id:"parking",name:"駐車スペースなし",    note:"近隣コインパーキング実費相当", price:1100}
+];
+// セット割: サービス2種で5% / 3種以上で10%（オプション除く）
+
+var state = {svc:{}, opt:{}};
+
+function yen(n){return "¥"+n.toLocaleString("ja-JP")}
+
+function build(){
+  var sc = document.getElementById("svcCards");
+  SERVICES.forEach(function(s){
+    var el = document.createElement("div");
+    el.className = "svc"; el.tabIndex = 0; el.setAttribute("role","checkbox"); el.setAttribute("aria-checked","false");
+    el.innerHTML = '<div class="check">✓</div>'
+      + '<div class="head"><h3>'+s.name+'</h3><span class="price">'+yen(s.price)+'<span style="font-size:.7em;color:var(--ink-faint)">/'+s.unit+'</span></span></div>'
+      + '<div class="desc">'+s.desc+'</div>'
+      + '<div class="qty"><label>数量（'+s.unit+'）</label>'
+      + '<button type="button" data-d="-1" aria-label="減らす">−</button>'
+      + '<span class="n">1</span>'
+      + '<button type="button" data-d="1" aria-label="増やす">＋</button></div>';
+    function toggle(){
+      if(state.svc[s.id]){delete state.svc[s.id];el.classList.remove("on");el.setAttribute("aria-checked","false");}
+      else{state.svc[s.id]=s.min;el.classList.add("on");el.setAttribute("aria-checked","true");}
+      render();
+    }
+    el.addEventListener("click",function(e){if(e.target.closest(".qty"))return;toggle();});
+    el.addEventListener("keydown",function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();toggle();}});
+    el.querySelectorAll(".qty button").forEach(function(b){
+      b.addEventListener("click",function(){
+        var q=(state.svc[s.id]||s.min)+(+b.dataset.d);
+        q=Math.max(s.min,Math.min(s.max,q));
+        state.svc[s.id]=q;
+        el.querySelector(".n").textContent=q;
+        el.querySelector('[data-d="-1"]').disabled=(q<=s.min);
+        el.querySelector('[data-d="1"]').disabled=(q>=s.max);
+        render();
+      });
+    });
+    sc.appendChild(el);
+  });
+  var ol = document.getElementById("optList");
+  OPTIONS.forEach(function(o){
+    var el=document.createElement("div");
+    el.className="opt";el.tabIndex=0;el.setAttribute("role","checkbox");el.setAttribute("aria-checked","false");
+    el.innerHTML='<span class="box">✓</span><span class="t">'+o.name+'<small>'+o.note+'</small></span>'
+      +'<span class="p">'+(o.price<0?"−"+yen(-o.price):"+"+yen(o.price))+'</span>';
+    function toggle(){
+      if(state.opt[o.id]){delete state.opt[o.id];el.classList.remove("on");el.setAttribute("aria-checked","false");}
+      else{state.opt[o.id]=1;el.classList.add("on");el.setAttribute("aria-checked","true");}
+      render();
+    }
+    el.addEventListener("click",toggle);
+    el.addEventListener("keydown",function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();toggle();}});
+    ol.appendChild(el);
+  });
+}
+
+function render(){
+  var lines=[],sub=0,minutes=0,kinds=0;
+  SERVICES.forEach(function(s){
+    var q=state.svc[s.id];if(!q)return;
+    kinds++;var amt=s.price*q;sub+=amt;minutes+=s.time*q;
+    lines.push({nm:s.name+(q>1?" × "+q:""),v:yen(amt)});
+  });
+  var disc=0;
+  if(kinds>=3)disc=Math.round(sub*0.10);
+  else if(kinds===2)disc=Math.round(sub*0.05);
+  var optSum=0;
+  OPTIONS.forEach(function(o){if(state.opt[o.id]){optSum+=o.price;lines.push({nm:o.name,v:(o.price<0?"−":"")+yen(Math.abs(o.price))});}});
+  if(disc>0)lines.push({nm:"セット割引（"+(kinds>=3?"3種以上 −10%":"2種 −5%")+"）",v:"−"+yen(disc),disc:true});
+  var total=Math.max(0,sub-disc+optSum);
+
+  var box=document.getElementById("lines");
+  if(!lines.length){box.innerHTML='<div class="empty">サービスを選択すると、ここに内訳が表示されます。</div>';}
+  else{box.innerHTML=lines.map(function(l){return '<div class="line'+(l.disc?" disc":"")+'"><span class="nm">'+l.nm+'</span><span class="v">'+l.v+'</span></div>'}).join("");}
+  document.getElementById("total").textContent=yen(total);
+  document.getElementById("mTotal").textContent=yen(total);
+  var t=document.getElementById("time");
+  if(minutes>0){var h=Math.floor(minutes/60),m=minutes%60;t.textContent="作業時間の目安：約"+(h>0?h+"時間":"")+(m>0?m+"分":"");}
+  else t.textContent="";
+}
+
+function toast(){
+  var el=document.getElementById("toast");
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t=setTimeout(function(){el.classList.remove("show")},2600);
+}
+document.getElementById("ctaBtn").addEventListener("click",toast);
+document.getElementById("mCta").addEventListener("click",toast);
+
+build();render();
+</script>
+</body>
+</html>
