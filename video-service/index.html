@@ -135,6 +135,21 @@ figcaption{font-size:.78rem;color:var(--ink-faint);margin-top:var(--s-2);letter-
 footer{border-top:1px solid var(--line);padding-block:var(--s-6);color:var(--ink-faint);font-size:.78rem}
 
 /* ── reveal ────────────────────────────────── */
+/* 見本の再生。⛔再生バーを最初から出すと、画面下の帯（まとめの一文）が隠れる。
+   JS が動いた時だけバーを外して、代わりに再生ボタンを重ねる。押したらバーを戻す。 */
+.vbox{position:relative}
+.vbox .play{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  border:0;padding:0;background:transparent;cursor:pointer;width:100%;height:100%}
+html.js .vbox .play{display:flex}
+.vbox .play::before{content:"";width:76px;height:76px;border-radius:50%;
+  background:oklch(22% 0.04 250/.72);backdrop-filter:blur(2px);
+  box-shadow:0 6px 24px oklch(20% 0.03 250/.35);transition:transform .18s ease,background .18s ease}
+.vbox .play::after{content:"";position:absolute;width:0;height:0;border-style:solid;
+  border-width:13px 0 13px 22px;border-color:transparent transparent transparent #fff;
+  margin-left:5px;pointer-events:none}
+.vbox .play:hover::before{transform:scale(1.06);background:oklch(22% 0.04 250/.85)}
+.vbox .play:focus-visible{outline:3px solid oklch(55% 0.14 250);outline-offset:3px}
+
 /* ⛔既定は「見えている」。隠すのは JS が動いた時だけ（html.js）。
    これを逆にすると、JSが落ちた環境で本文が丸ごと消える（2026-08-07 実際に踏んだ）。 */
 .js .rv{opacity:0;transform:translateX(-14px);transition:opacity var(--dur) var(--ease-out),transform var(--dur) var(--ease-out)}
@@ -272,8 +287,8 @@ footer{border-top:1px solid var(--line);padding-block:var(--s-6);color:var(--ink
     </div>
     <!-- ✅2026-08-08 掲載。VOICEPEAK（女性1／速さ115／ピッチ-50%／幸せ35%／楽しみ5%）。
          ⛔差し替えるときは demo_b2b/long/ の最新版から作り直す。 -->
-    <figure class="shot" style="margin-top:var(--s-6)">
-      <video src="media/sample.mp4" poster="media/poster.jpg" controls preload="none"
+    <figure class="shot vbox" style="margin-top:var(--s-6)">
+      <video id="sample" src="media/sample.mp4" poster="media/poster.jpg" controls preload="none"
              width="1280" height="720" style="width:100%;height:auto;display:block;border:1px solid var(--line)">
         お使いの環境では動画を再生できません。
       </video>
@@ -289,7 +304,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s-6);color:var(--ink
 
     <div class="qa">
       <h3>相場と比べて、この値段はどうなんですか。</h3>
-      <p>公開されている料金表で調べたところ、撮影込みの制作会社は1本385,000円から、ナレーションだけを代行する事務所は30分70,000円（映像を付けると+6,000〜33,000円）でした。撮影も出演も無い代わりに、原稿から動画までを通しで作るので、その間に価格を置いています。</p>
+      <p>公開されている料金表を当たったところ、撮影込みで作る会社の一例が1本385,000円から、ナレーションだけを代行する事務所の一例が30分70,000円（映像を付けると+6,000〜33,000円）でした。いずれも各1社の公開料金であり、相場そのものではありません。撮影も出演も無い代わりに、原稿から動画までを通しで作るので、その間に価格を置いています。</p>
     </div>
     <div class="qa">
       <h3>ナレーションは合成音声ですか。聞けば分かりますか。</h3>
@@ -339,6 +354,22 @@ footer{border-top:1px solid var(--line);padding-block:var(--s-6);color:var(--ink
     es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
   },{rootMargin:'0px 0px -12% 0px'});
   els.forEach(function(e){io.observe(e)});
+})();
+
+/* 見本の再生ボタン。⛔JS が動かない時は controls が付いたままなので、必ず再生できる */
+(function(){
+  var v=document.getElementById('sample');
+  if(!v||!v.parentNode)return;
+  v.removeAttribute('controls');
+  var b=document.createElement('button');
+  b.className='play';b.type='button';
+  b.setAttribute('aria-label','見本の動画を再生する');
+  b.addEventListener('click',function(){
+    v.controls=true;b.remove();
+    var p=v.play();
+    if(p&&p.catch)p.catch(function(){});   /* ⛔再生が拒まれてもバーは戻っている */
+  });
+  v.parentNode.insertBefore(b,v.nextSibling);
 })();
 </script>
 
