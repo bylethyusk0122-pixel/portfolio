@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>解説・マニュアル動画制作ポートフォリオ ｜ FAQ・社内手順</title>
-<meta name="description" content="FAQ、社内手順、サービス説明を、既存原稿からナレーション・スライド・字幕付き動画にします。料金、納期、完成見本、検品内容を公開しています。">
+<title>制作ポートフォリオ ｜ Web・ツール・動画</title>
+<meta name="description" content="Webページ、操作できる料金ツール、解説動画を、目的の整理から設計・制作・検証まで担当するポートフォリオです。自主制作5件を公開しています。">
 <style>
 /* Hallmark · macrostructure: Catalogue (portfolio hub) · tone: neutral / editorial / honest · anchor hue: ink-blue 255
  * pre-emit critique: P4 H5 E4 S4 R5 V4
@@ -37,9 +37,9 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 
 .hero{padding-block:var(--s-8);background:var(--navy);color:#fff;border-bottom:6px solid var(--orange);position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 58%,rgba(70,157,255,.12) 58% 72%,transparent 72%)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:var(--s-8);align-items:center;position:relative}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr);gap:var(--s-8);align-items:center;position:relative}
 .hero .eyebrow{font-family:var(--num);font-size:.72rem;letter-spacing:.3em;color:#79baff;font-weight:800;text-transform:uppercase}
-.hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1.32;letter-spacing:0;margin-top:var(--s-4)}
+.hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(2rem,3.7vw,2.9rem);line-height:1.3;letter-spacing:0;margin-top:var(--s-4)}
 .hero p{color:#c8d5e5;margin-top:var(--s-5);max-width:52ch}
 .hero .pts{display:flex;gap:var(--s-5);flex-wrap:wrap;margin-top:var(--s-6)}
 .hero .pt{font-size:.78rem;color:#e8f1fb;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:2px;padding:.48em .9em}
@@ -49,11 +49,17 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .btn.secondary{background:transparent;border-color:#8eb9e8;color:#fff}
 .btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px oklch(24% 0.01 260/.10)}
 .btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.hero-visual{position:relative;margin:0}
-.hero-visual::before{content:"WORK SAMPLE";position:absolute;top:-18px;right:0;font:800 .65rem/1 var(--num);letter-spacing:.2em;color:#79baff}
-.hero-visual img{display:block;width:100%;height:auto;border:1px solid rgba(255,255,255,.28);box-shadow:18px 18px 0 rgba(0,0,0,.22)}
-.hero-visual figcaption{background:#fff;color:var(--ink);font-size:.76rem;font-weight:700;padding:.7em 1em;border-left:5px solid var(--orange)}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{max-width:680px}.hero-visual img{box-shadow:10px 10px 0 rgba(0,0,0,.22)}}
+.showcase{display:grid;grid-template-columns:1.15fr .85fr;grid-template-rows:1fr 1fr;gap:10px;min-height:430px}
+.showcase-item{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.2);background:#fff}
+.showcase-item img{width:100%;height:100%;object-fit:cover;display:block}
+.showcase-item.web{grid-row:1/3;background:#05080d}
+.showcase-item.web img{object-position:center;opacity:.9}
+.showcase-item.video img{object-position:center}
+.showcase-item.tool{display:flex;align-items:center;justify-content:center;background:#eaf4f5}
+.showcase-item .label{position:absolute;left:0;bottom:0;background:var(--orange);color:#111827;padding:.45em .75em;font:900 .62rem/1 var(--num);letter-spacing:.12em}
+.showcase-total{background:#fff;color:var(--ink);padding:14px 18px;border:1px solid #b7d7dc;box-shadow:0 12px 24px rgba(11,31,58,.14);text-align:left}
+.showcase-total small{display:block;color:var(--ink-faint);font-size:.6rem}.showcase-total b{display:block;font:900 1.35rem/1.4 var(--num);color:#24737d}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.showcase{min-height:360px;max-width:720px}}
 
 .proof{border-bottom:1px solid var(--line);background:#fff}
 .proof .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5);padding-block:var(--s-5)}
@@ -62,28 +68,12 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .proof span{display:block;color:var(--ink-faint);font-size:.76rem;margin-top:.2em}
 @media(max-width:680px){.proof .wrap{grid-template-columns:1fr}.proof .item{padding-block:.15em}}
 
-.case{padding-block:var(--s-8);background:#fff;border-bottom:1px solid var(--line)}
-.case-head{display:flex;justify-content:space-between;gap:var(--s-5);align-items:end;border-bottom:1px solid var(--line);padding-bottom:var(--s-4)}
-.case-kicker{font:800 .72rem/1 var(--num);letter-spacing:.22em;color:#2e71b8}
-.case h2{font-size:clamp(1.45rem,3vw,2.1rem);font-weight:900;line-height:1.45;margin-top:var(--s-3)}
-.fiction{font-size:.72rem;color:var(--ink-faint);border:1px solid var(--line);padding:.4em .8em;white-space:nowrap}
-.case-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--s-7);margin-top:var(--s-6)}
-.case-visual{margin:0;background:var(--navy);padding:var(--s-4)}
-.case-visual img{display:block;width:100%;height:auto}
-.case-visual figcaption{color:#b9cbe0;font-size:.72rem;margin-top:var(--s-3)}
-.change-list{display:grid;gap:var(--s-4)}
-.change{display:grid;grid-template-columns:7.5em 1fr;gap:var(--s-4);padding-bottom:var(--s-4);border-bottom:1px solid var(--line)}
-.change dt{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#2e71b8}
-.change dd{font-size:.88rem;color:var(--ink-soft)}
-.change strong{color:var(--ink)}
-.case-note{font-size:.72rem;color:var(--ink-faint);margin-top:var(--s-4)}
-@media(max-width:760px){.case-head{align-items:start;flex-direction:column}.case-grid{grid-template-columns:1fr}.change{grid-template-columns:1fr;gap:var(--s-2)}}
-
 .works{padding-block:var(--s-8)}
 .works h2{font-family:var(--sans);font-weight:900;font-size:1.65rem;letter-spacing:.02em;margin-bottom:var(--s-2)}
 .works .sub{color:var(--ink-faint);font-size:.85rem;margin-bottom:var(--s-7)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6)}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
 
 .card{background:#fff;border:1px solid #d4d9df;border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
 .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px oklch(24% 0.01 260/.10)}
@@ -115,12 +105,8 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .tag{font-family:var(--num);font-size:.64rem;font-weight:700;letter-spacing:.08em;color:var(--accent);border:1px solid oklch(48% 0.10 255/.3);border-radius:4px;padding:.2em .7em}
 .card h3{font-size:1.1rem;font-weight:800;letter-spacing:.04em}
 .card .desc{font-size:.85rem;color:var(--ink-soft);margin-top:var(--s-3);flex:1}
-.card .offer{font-family:var(--num);font-size:.82rem;font-weight:800;color:var(--ink);margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--line)}
 .card .go{margin-top:var(--s-4);font-size:.84rem;font-weight:800;color:var(--accent);letter-spacing:.06em}
 .card:hover .go{text-decoration:underline;text-underline-offset:4px}
-.card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);border-top:5px solid var(--orange);box-shadow:0 16px 38px rgba(11,31,58,.10)}
-.card.featured .thumb{height:100%;min-height:250px}
-@media(max-width:760px){.card.featured{grid-column:auto;display:flex}.card.featured .thumb{height:170px;min-height:0}}
 
 .about{background:var(--paper-2);border-block:1px solid var(--line);padding-block:var(--s-8)}
 .about h2{font-family:var(--sans);font-weight:900;font-size:1.6rem;letter-spacing:.02em;margin-bottom:var(--s-6)}
@@ -155,75 +141,41 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 <header class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">B2B Explainer Video — Portfolio</span>
-      <h1>同じ説明を繰り返す<br>仕事を、見れば分かる<br>動画に変えます。</h1>
-      <p>FAQ、社内手順、サービスの使い方。既存の原稿やヘルプ記事から、ナレーション・スライド・字幕付きの動画を制作します。</p>
+      <span class="eyebrow">Selected Work — Web, Tools &amp; Video</span>
+      <h1>伝える。選べる。<br>使える。目的から、<br>形をつくります。</h1>
+      <p>商品を伝えるWebページ、判断を助けるツール、説明を揃える動画。見た目だけで終わらず、使う場面まで設計した自主制作を公開しています。</p>
       <div class="pts">
-        <span class="pt">FAQ短編 1本 30,000円</span>
-        <span class="pt">5本一式 100,000円</span>
-        <span class="pt">初稿 最短3営業日</span>
-        <span class="pt">修正2回込み</span>
+        <span class="pt">Web Design</span>
+        <span class="pt">Interactive Tools</span>
+        <span class="pt">Explainer Video</span>
+        <span class="pt">Planning &amp; QA</span>
       </div>
       <div class="actions">
-        <a class="btn primary" href="video-service/#sample">2分の完成見本を見る</a>
-        <a class="btn secondary" href="video-service/">料金と制作工程を見る</a>
+        <a class="btn primary" href="#works">制作物を見る</a>
+        <a class="btn secondary" href="#contact">相談する</a>
       </div>
     </div>
-    <figure class="hero-visual">
-      <img src="video-service/img/shot-step1.jpg" width="1600" height="900" alt="経費精算マニュアル動画で領収書の条件を説明する画面">
-      <figcaption>原稿から制作した、2分08秒の社内マニュアル動画</figcaption>
-    </figure>
+    <div class="showcase" aria-label="Web、動画、料金ツールの制作例">
+      <div class="showcase-item web"><img src="torqx-driver/img/hero.png" width="1536" height="1024" alt="電動精密ドライバーの商品ランディングページ"><span class="label">WEB / LANDING PAGE</span></div>
+      <div class="showcase-item video"><img src="video-service/img/shot-title.jpg" width="1600" height="900" alt="経費精算の社内マニュアル動画"><span class="label">VIDEO / MANUAL</span></div>
+      <div class="showcase-item tool"><div class="showcase-total"><small>合計（税込）</small><b>¥43,890</b></div><span class="label">TOOL / ESTIMATOR</span></div>
+    </div>
   </div>
 </header>
 
 <aside class="proof" aria-label="対応方針">
   <div class="wrap">
-    <div class="item"><b>2分08秒の完成見本を公開</b><span>音声・字幕・画面を通しで確認できます</span></div>
-    <div class="item"><b>原稿から納品まで一人で担当</b><span>構成・音声・スライド・字幕をまとめて制作</span></div>
-    <div class="item"><b>読み・文字・字幕・音量を検品</b><span>正常に再生できるだけでは納品しません</span></div>
+    <div class="item"><b>5件すべて実物を公開</b><span>ページ、操作、動画をその場で確認できます</span></div>
+    <div class="item"><b>企画から実装まで一人で担当</b><span>目的・構成・制作・検証を分断しません</span></div>
+    <div class="item"><b>自主制作であることを明記</b><span>実績や効果を作らず、確認できる事実を見せます</span></div>
   </div>
 </aside>
 
-<section class="case" aria-labelledby="case-title">
-  <div class="wrap">
-    <div class="case-head">
-      <div><span class="case-kicker">FICTIONAL CASE 01</span><h2 id="case-title">経費精算の説明を、担当者の口頭対応から動画へ。</h2></div>
-      <span class="fiction">架空の導入ケース</span>
-    </div>
-    <div class="case-grid">
-      <figure class="case-visual">
-        <img src="video-service/img/shot-step3.jpg" width="1600" height="900" alt="経費精算の締め切りと問い合わせ先を説明する動画画面">
-        <figcaption>制作物：2分08秒 ／ MP4 1920×1080 ／ 字幕データ付き</figcaption>
-      </figure>
-      <div>
-        <dl class="change-list">
-          <div class="change"><dt>想定課題</dt><dd>入社時や締め日前に、担当者が同じ手順を何度も説明している。説明する人によって内容も少しずつ違う。</dd></div>
-          <div class="change"><dt>制作したもの</dt><dd><strong>領収書、申請手順、締め切り、例外対応</strong>を2分08秒に整理。ナレーション・スライド・字幕を同じ原稿から制作。</dd></div>
-          <div class="change"><dt>想定される変化</dt><dd>最初の説明を動画へ置き換え、質問がある人だけ個別対応する形にする。手順変更時は原稿を直して同じ体裁で更新できる。</dd></div>
-          <div class="change"><dt>検品</dt><dd>社名・専門語の読み、文字化け、字幕と音声のずれ、動画ごとの音量差を納品前に確認。</dd></div>
-        </dl>
-        <p class="case-note">※実在企業の導入実績ではありません。想定課題と効果を明示した自主制作ケースです。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="works" id="works">
   <div class="wrap">
-    <h2>完成見本と、その他の制作物</h2>
-    <p class="sub">最初に動画制作の完成見本を掲載しています。以降は、画面設計・実装にも対応できることを確認いただくための自主制作です。</p>
+    <h2>Selected Work</h2>
+    <p class="sub">制作物ごとに、何を変えるために作ったか、どこまで担当したかを記載しています。すべて架空設定の自主制作です。</p>
     <div class="grid">
-
-      <a class="card featured" href="video-service/">
-        <div class="thumb t-manual"><img src="video-service/img/shot-title.jpg" width="1600" height="900" alt="経費精算の社内マニュアル動画の一場面"></div>
-        <div class="body">
-          <div class="tags"><span class="tag">動画制作</span><span class="tag">社内マニュアル</span><span class="tag">ナレーション・字幕</span></div>
-          <h3>解説・マニュアル動画の制作</h3>
-          <p class="desc">担当者が同じ説明を繰り返す状態を、必要な人がいつでも見られる動画へ。原稿から構成・ナレーション・スライド・字幕まで制作します。</p>
-          <p class="offer">FAQ短編 1本30,000円 ／ 5本100,000円</p>
-          <span class="go">制作例と料金を見る →</span>
-        </div>
-      </a>
 
       <a class="card" href="yohaku-coffee/">
         <div class="thumb t-yohaku"><span class="big">余白</span><span class="acc"></span></div>
@@ -242,6 +194,16 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
           <h3>電動精密ドライバー「TORQX ONE」商品LP</h3>
           <p class="desc">商品の違いが分からない状態から、比較・仕様・購入まで迷わず進める物販LP。スマホでは購入導線を常時表示します。</p>
           <span class="go">サンプルを見る →</span>
+        </div>
+      </a>
+
+      <a class="card" href="video-service/">
+        <div class="thumb t-manual"><img src="video-service/img/shot-title.jpg" width="1600" height="900" alt="経費精算の社内マニュアル動画の一場面"></div>
+        <div class="body">
+          <div class="tags"><span class="tag">動画制作</span><span class="tag">社内マニュアル</span><span class="tag">ナレーション・字幕</span></div>
+          <h3>解説・マニュアル動画の制作</h3>
+          <p class="desc">口頭説明を、必要な人がいつでも見られる動画へ。原稿から構成・ナレーション・スライド・字幕まで制作した架空ケースです。</p>
+          <span class="go">完成見本と工程を見る →</span>
         </div>
       </a>
 
@@ -271,7 +233,7 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 
 <section class="about">
   <div class="wrap">
-    <h2>動画を中心に、必要な画面まで作れます。</h2>
+    <h2>領域をまたいで、必要な形を選べます。</h2>
     <div class="ab-grid">
       <div class="ab">
         <h3>LP・Webページ制作</h3>
