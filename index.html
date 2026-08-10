@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>制作ポートフォリオ ｜ LP・バナー・Webツール・動画制作</title>
-<meta name="description" content="AI活用で高速に、手で丁寧に仕上げる制作ポートフォリオ。LP・広告バナー・Web見積もりツール・解説動画の自主制作サンプル5点を掲載しています。">
+<meta name="description" content="LP・広告バナー・Web見積もりツール・解説動画を、企画から制作・検証まで一人で担当する制作ポートフォリオ。自主制作サンプル5点を掲載しています。">
 <style>
 /* Hallmark · macrostructure: Catalogue (portfolio hub) · tone: neutral / editorial / honest · anchor hue: ink-blue 255
  * pre-emit critique: P4 H5 E4 S4 R5 V4
@@ -38,6 +38,19 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .hero p{color:var(--ink-soft);margin-top:var(--s-5);max-width:56ch}
 .hero .pts{display:flex;gap:var(--s-5);flex-wrap:wrap;margin-top:var(--s-6)}
 .hero .pt{font-size:.82rem;color:var(--ink-soft);border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5em 1.3em}
+.hero .actions{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:8px;padding:.65em 1.3em;font-size:.84rem;font-weight:800;letter-spacing:.05em;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.secondary{background:#fff;color:var(--accent)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px oklch(24% 0.01 260/.10)}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.proof{border-bottom:1px solid var(--line);background:#fff}
+.proof .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5);padding-block:var(--s-5)}
+.proof .item{padding-left:var(--s-4);border-left:2px solid var(--line)}
+.proof b{display:block;font-size:.86rem}
+.proof span{display:block;color:var(--ink-faint);font-size:.76rem;margin-top:.2em}
+@media(max-width:680px){.proof .wrap{grid-template-columns:1fr}.proof .item{padding-block:.15em}}
 
 .works{padding-block:var(--s-8)}
 .works h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-2)}
@@ -77,14 +90,33 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .card .desc{font-size:.85rem;color:var(--ink-soft);margin-top:var(--s-3);flex:1}
 .card .go{margin-top:var(--s-4);font-size:.84rem;font-weight:800;color:var(--accent);letter-spacing:.06em}
 .card:hover .go{text-decoration:underline;text-underline-offset:4px}
+.card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.card.featured .thumb{height:100%;min-height:250px}
+@media(max-width:760px){.card.featured{grid-column:auto;display:flex}.card.featured .thumb{height:170px;min-height:0}}
 
 .about{background:var(--paper-2);border-block:1px solid var(--line);padding-block:var(--s-8)}
 .about h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-6)}
-.ab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-6)}
+.ab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6)}
 @media(max-width:760px){.ab-grid{grid-template-columns:1fr}}
 .ab h3{font-size:.95rem;font-weight:800;margin-bottom:var(--s-3);padding-left:.9em;position:relative}
 .ab h3::before{content:"";position:absolute;left:0;top:.35em;width:3px;height:1em;background:var(--accent)}
 .ab p{font-size:.85rem;color:var(--ink-soft)}
+
+.process{padding-block:var(--s-8);border-bottom:1px solid var(--line)}
+.process h2,.contact h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em}
+.process .intro,.contact .intro{color:var(--ink-faint);font-size:.85rem;margin-top:var(--s-2)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5);margin-top:var(--s-7)}
+.step{border-top:2px solid var(--line);padding-top:var(--s-4)}
+.step .n{font-family:var(--num);font-size:.68rem;letter-spacing:.18em;color:var(--accent);font-weight:800}
+.step h3{font-size:.95rem;margin-top:var(--s-2)}
+.step p{font-size:.83rem;color:var(--ink-soft);margin-top:var(--s-2)}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+
+.contact{padding-block:var(--s-8);background:var(--paper-2);border-bottom:1px solid var(--line)}
+.contact-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-7);align-items:center;margin-top:var(--s-6);background:#fff;border:1px solid var(--line);border-radius:14px;padding:var(--s-6)}
+.contact-box p{font-size:.86rem;color:var(--ink-soft)}
+.contact-box strong{display:block;color:var(--ink);font-size:1rem;margin-bottom:var(--s-2)}
+@media(max-width:700px){.contact-box{grid-template-columns:1fr;gap:var(--s-5)}.contact-box .btn{width:100%}}
 
 .foot{padding-block:var(--s-7)}
 .foot .wrap{font-size:.72rem;color:var(--ink-faint);line-height:2}
@@ -94,23 +126,45 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Portfolio — Web Design &amp; Build</span>
-    <h1>AIで速く、手で丁寧に。<br>設計から実装まで、一人で完結します。</h1>
-    <p>LP・広告バナー・Web見積もりツール・解説動画の自主制作サンプルです。企画、デザイン、実装、台本、ナレーション、検証まで、必要な工程を一人で組み立てています。</p>
+    <span class="eyebrow">Portfolio — Web, Tools &amp; Video</span>
+    <h1>伝えたいことを、<br>迷わず使える形にします。</h1>
+    <p>商品を売るWebページ、見積もりを楽にするツール、説明の負担を減らす動画。目的から必要な形を考え、企画・制作・検証まで一人で担当します。</p>
     <div class="pts">
       <span class="pt">デザイン × コーディング両対応</span>
       <span class="pt">スマホ完全対応</span>
       <span class="pt">コピーもお任せOK</span>
       <span class="pt">AI活用・業務自動化の相談OK</span>
     </div>
+    <div class="actions">
+      <a class="btn primary" href="#works">制作物を見る</a>
+      <a class="btn secondary" href="#contact">相談内容をメールで送る</a>
+    </div>
   </div>
 </header>
 
-<section class="works">
+<aside class="proof" aria-label="対応方針">
+  <div class="wrap">
+    <div class="item"><b>企画から納品まで一人で担当</b><span>窓口と制作者が分かれません</span></div>
+    <div class="item"><b>公開できるサンプルで確認可能</b><span>画面・操作・動画を実際に見られます</span></div>
+    <div class="item"><b>通常1営業日以内に返信</b><span>やり取りはメールで完結できます</span></div>
+  </div>
+</aside>
+
+<section class="works" id="works">
   <div class="wrap">
     <h2>制作サンプル</h2>
-    <p class="sub">すべて架空ブランドの自主制作です。実案件と同じ工程（企画→設計→デザイン→実装→検証）で制作しています。</p>
+    <p class="sub">掲載物は自主制作です。架空ブランドや架空の業務を題材に、企画→設計→制作→検証まで通しで作っています。</p>
     <div class="grid">
+
+      <a class="card featured" href="video-service/">
+        <div class="thumb t-manual"><img src="video-service/img/shot-title.jpg" width="1600" height="900" alt="経費精算の社内マニュアル動画の一場面"></div>
+        <div class="body">
+          <div class="tags"><span class="tag">動画制作</span><span class="tag">社内マニュアル</span><span class="tag">ナレーション・字幕</span></div>
+          <h3>解説・マニュアル動画の制作</h3>
+          <p class="desc">原稿や既存ヘルプをもとに、構成・ナレーション・スライド・字幕まで一式で制作。完成サンプル、制作工程、料金を掲載しています。</p>
+          <span class="go">制作例と料金を見る →</span>
+        </div>
+      </a>
 
       <a class="card" href="yohaku-coffee/">
         <div class="thumb t-yohaku"><span class="big">余白</span><span class="acc"></span></div>
@@ -152,16 +206,6 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
         </div>
       </a>
 
-      <a class="card" href="video-service/">
-        <div class="thumb t-manual"><img src="video-service/img/shot-title.jpg" width="1600" height="900" alt="経費精算の社内マニュアル動画の一場面"></div>
-        <div class="body">
-          <div class="tags"><span class="tag">動画制作</span><span class="tag">社内マニュアル</span><span class="tag">ナレーション・字幕</span></div>
-          <h3>解説・マニュアル動画の制作</h3>
-          <p class="desc">原稿や既存ヘルプをもとに、構成・ナレーション・スライド・字幕まで一式で制作。完成サンプル、制作工程、料金を掲載しています。</p>
-          <span class="go">制作例と料金を見る →</span>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
@@ -182,13 +226,40 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
         <h3>AI活用・業務の自動化</h3>
         <p>料金シミュレーター等のWebツール制作のほか、ChatGPT・Claudeの活用レクチャー、資料作成やブラウザ定型業務の自動化もお手伝いします。自社でもAIによる夜間自動調査・チャット連携の仕組みを構築・運用しています。</p>
       </div>
+      <div class="ab">
+        <h3>解説・マニュアル動画制作</h3>
+        <p>既存の手順書やヘルプ記事から、構成・ナレーション・スライド・字幕まで制作します。撮影や出演者の手配は不要です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <h2 id="process-title">ご相談から納品まで</h2>
+    <p class="intro">最初から仕様を固める必要はありません。変えたいことを聞いて、必要な制作物に整理します。</p>
+    <div class="steps">
+      <div class="step"><span class="n">STEP 01</span><h3>目的を確認</h3><p>誰に何をしてほしいか、現状の困りごと、希望納期と予算を確認します。</p></div>
+      <div class="step"><span class="n">STEP 02</span><h3>範囲と見積もりを提示</h3><p>作るもの、納品形式、修正回数、料金を制作前に文章で揃えます。</p></div>
+      <div class="step"><span class="n">STEP 03</span><h3>制作・確認・納品</h3><p>途中確認を挟み、表示・操作・音声など必要な検証をしてから納品します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 id="contact-title">まず、変えたいことを教えてください。</h2>
+    <p class="intro">「この内容で頼めるか」「予算内で何ができるか」の確認だけでも構いません。</p>
+    <div class="contact-box">
+      <p><strong>メールに書いてほしいこと</strong>作りたいもの／今困っていること／希望時期／予算の目安。決まっていない項目は「未定」で大丈夫です。</p>
+      <a class="btn primary" href="mailto:bylethyusk0122@gmail.com?subject=%E5%88%B6%E4%BD%9C%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">bylethyusk0122@gmail.com</a>
     </div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="wrap">
-    掲載サンプルはすべて架空ブランドの自主制作であり、実在の企業・商品・サービスとは関係ありません。<br>
+    掲載物は自主制作であり、架空ブランド・架空業務を題材にしています。<br>
     © 2026 Web Design &amp; Build Portfolio.
   </div>
 </footer>
