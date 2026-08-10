@@ -18,6 +18,9 @@
   --ink-faint:oklch(58% 0.012 260);
   --line:oklch(88% 0.006 90);
   --accent:oklch(48% 0.10 255);
+  --navy:#0b1f3a;
+  --navy-2:#12345b;
+  --orange:#ff6b3d;
   --serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;
   --sans:"Yu Gothic","YuGothic","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
   --num:"Segoe UI","Helvetica Neue",Arial,sans-serif;
@@ -27,38 +30,62 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{overflow-x:clip}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:#f5f3ed;color:var(--ink);line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s-5)}
 
-.hero{padding-block:var(--s-9) var(--s-8);border-bottom:1px solid var(--line)}
-.hero .eyebrow{font-family:var(--num);font-size:.72rem;letter-spacing:.3em;color:var(--accent);font-weight:700;text-transform:uppercase}
-.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.45;letter-spacing:.05em;margin-top:var(--s-4)}
-.hero p{color:var(--ink-soft);margin-top:var(--s-5);max-width:56ch}
+.hero{padding-block:var(--s-8);background:var(--navy);color:#fff;border-bottom:6px solid var(--orange);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 58%,rgba(70,157,255,.12) 58% 72%,transparent 72%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:var(--s-8);align-items:center;position:relative}
+.hero .eyebrow{font-family:var(--num);font-size:.72rem;letter-spacing:.3em;color:#79baff;font-weight:800;text-transform:uppercase}
+.hero h1{font-family:var(--sans);font-weight:900;font-size:clamp(2rem,4.6vw,3.55rem);line-height:1.28;letter-spacing:.01em;margin-top:var(--s-4)}
+.hero p{color:#c8d5e5;margin-top:var(--s-5);max-width:52ch}
 .hero .pts{display:flex;gap:var(--s-5);flex-wrap:wrap;margin-top:var(--s-6)}
-.hero .pt{font-size:.82rem;color:var(--ink-soft);border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5em 1.3em}
+.hero .pt{font-size:.78rem;color:#e8f1fb;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:2px;padding:.48em .9em}
 .hero .actions{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-6)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:8px;padding:.65em 1.3em;font-size:.84rem;font-weight:800;letter-spacing:.05em;border:1px solid var(--accent)}
-.btn.primary{background:var(--accent);color:#fff}
-.btn.secondary{background:#fff;color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:2px;padding:.65em 1.3em;font-size:.84rem;font-weight:800;letter-spacing:.05em;border:1px solid var(--accent);transition:transform .18s ease,box-shadow .18s ease}
+.btn.primary{background:var(--orange);border-color:var(--orange);color:#111827}
+.btn.secondary{background:transparent;border-color:#8eb9e8;color:#fff}
 .btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px oklch(24% 0.01 260/.10)}
 .btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.hero-visual{position:relative;margin:0}
+.hero-visual::before{content:"WORK SAMPLE";position:absolute;top:-18px;right:0;font:800 .65rem/1 var(--num);letter-spacing:.2em;color:#79baff}
+.hero-visual img{display:block;width:100%;height:auto;border:1px solid rgba(255,255,255,.28);box-shadow:18px 18px 0 rgba(0,0,0,.22)}
+.hero-visual figcaption{background:#fff;color:var(--ink);font-size:.76rem;font-weight:700;padding:.7em 1em;border-left:5px solid var(--orange)}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{max-width:680px}.hero-visual img{box-shadow:10px 10px 0 rgba(0,0,0,.22)}}
 
 .proof{border-bottom:1px solid var(--line);background:#fff}
 .proof .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5);padding-block:var(--s-5)}
-.proof .item{padding-left:var(--s-4);border-left:2px solid var(--line)}
+.proof .item{padding-left:var(--s-4);border-left:3px solid #2e71b8}
 .proof b{display:block;font-size:.86rem}
 .proof span{display:block;color:var(--ink-faint);font-size:.76rem;margin-top:.2em}
 @media(max-width:680px){.proof .wrap{grid-template-columns:1fr}.proof .item{padding-block:.15em}}
 
+.case{padding-block:var(--s-8);background:#fff;border-bottom:1px solid var(--line)}
+.case-head{display:flex;justify-content:space-between;gap:var(--s-5);align-items:end;border-bottom:1px solid var(--line);padding-bottom:var(--s-4)}
+.case-kicker{font:800 .72rem/1 var(--num);letter-spacing:.22em;color:#2e71b8}
+.case h2{font-size:clamp(1.45rem,3vw,2.1rem);font-weight:900;line-height:1.45;margin-top:var(--s-3)}
+.fiction{font-size:.72rem;color:var(--ink-faint);border:1px solid var(--line);padding:.4em .8em;white-space:nowrap}
+.case-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--s-7);margin-top:var(--s-6)}
+.case-visual{margin:0;background:var(--navy);padding:var(--s-4)}
+.case-visual img{display:block;width:100%;height:auto}
+.case-visual figcaption{color:#b9cbe0;font-size:.72rem;margin-top:var(--s-3)}
+.change-list{display:grid;gap:var(--s-4)}
+.change{display:grid;grid-template-columns:7.5em 1fr;gap:var(--s-4);padding-bottom:var(--s-4);border-bottom:1px solid var(--line)}
+.change dt{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#2e71b8}
+.change dd{font-size:.88rem;color:var(--ink-soft)}
+.change strong{color:var(--ink)}
+.case-note{font-size:.72rem;color:var(--ink-faint);margin-top:var(--s-4)}
+@media(max-width:760px){.case-head{align-items:start;flex-direction:column}.case-grid{grid-template-columns:1fr}.change{grid-template-columns:1fr;gap:var(--s-2)}}
+
 .works{padding-block:var(--s-8)}
-.works h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-2)}
+.works h2{font-family:var(--sans);font-weight:900;font-size:1.65rem;letter-spacing:.02em;margin-bottom:var(--s-2)}
 .works .sub{color:var(--ink-faint);font-size:.85rem;margin-bottom:var(--s-7)}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6)}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
 
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+.card{background:#fff;border:1px solid #d4d9df;border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
 .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px oklch(24% 0.01 260/.10)}
 .card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .thumb{height:170px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
@@ -91,12 +118,12 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .card .offer{font-family:var(--num);font-size:.82rem;font-weight:800;color:var(--ink);margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--line)}
 .card .go{margin-top:var(--s-4);font-size:.84rem;font-weight:800;color:var(--accent);letter-spacing:.06em}
 .card:hover .go{text-decoration:underline;text-underline-offset:4px}
-.card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);border-top:5px solid var(--orange);box-shadow:0 16px 38px rgba(11,31,58,.10)}
 .card.featured .thumb{height:100%;min-height:250px}
 @media(max-width:760px){.card.featured{grid-column:auto;display:flex}.card.featured .thumb{height:170px;min-height:0}}
 
 .about{background:var(--paper-2);border-block:1px solid var(--line);padding-block:var(--s-8)}
-.about h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em;margin-bottom:var(--s-6)}
+.about h2{font-family:var(--sans);font-weight:900;font-size:1.6rem;letter-spacing:.02em;margin-bottom:var(--s-6)}
 .ab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6)}
 @media(max-width:760px){.ab-grid{grid-template-columns:1fr}}
 .ab h3{font-size:.95rem;font-weight:800;margin-bottom:var(--s-3);padding-left:.9em;position:relative}
@@ -104,7 +131,7 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 .ab p{font-size:.85rem;color:var(--ink-soft)}
 
 .process{padding-block:var(--s-8);border-bottom:1px solid var(--line)}
-.process h2,.contact h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.08em}
+.process h2,.contact h2{font-family:var(--sans);font-weight:900;font-size:1.6rem;letter-spacing:.02em}
 .process .intro,.contact .intro{color:var(--ink-faint);font-size:.85rem;margin-top:var(--s-2)}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5);margin-top:var(--s-7)}
 .step{border-top:2px solid var(--line);padding-top:var(--s-4)}
@@ -114,7 +141,7 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 @media(max-width:760px){.steps{grid-template-columns:1fr}}
 
 .contact{padding-block:var(--s-8);background:var(--paper-2);border-bottom:1px solid var(--line)}
-.contact-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-7);align-items:center;margin-top:var(--s-6);background:#fff;border:1px solid var(--line);border-radius:14px;padding:var(--s-6)}
+.contact-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-7);align-items:center;margin-top:var(--s-6);background:#fff;border:1px solid var(--line);border-radius:2px;padding:var(--s-6)}
 .contact-box p{font-size:.86rem;color:var(--ink-soft)}
 .contact-box strong{display:block;color:var(--ink);font-size:1rem;margin-bottom:var(--s-2)}
 @media(max-width:700px){.contact-box{grid-template-columns:1fr;gap:var(--s-5)}.contact-box .btn{width:100%}}
@@ -126,20 +153,26 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
 <body>
 
 <header class="hero">
-  <div class="wrap">
-    <span class="eyebrow">B2B Explainer Video — Portfolio</span>
-    <h1>同じ説明を繰り返す仕事を、<br>見れば分かる動画に変えます。</h1>
-    <p>FAQ、社内手順、サービスの使い方。既存の原稿やヘルプ記事から、ナレーション・スライド・字幕付きの動画を制作します。</p>
-    <div class="pts">
-      <span class="pt">FAQ短編 1本 30,000円</span>
-      <span class="pt">5本一式 100,000円</span>
-      <span class="pt">初稿 最短3営業日</span>
-      <span class="pt">修正2回込み</span>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">B2B Explainer Video — Portfolio</span>
+      <h1>同じ説明を繰り返す仕事を、<br>見れば分かる動画に変えます。</h1>
+      <p>FAQ、社内手順、サービスの使い方。既存の原稿やヘルプ記事から、ナレーション・スライド・字幕付きの動画を制作します。</p>
+      <div class="pts">
+        <span class="pt">FAQ短編 1本 30,000円</span>
+        <span class="pt">5本一式 100,000円</span>
+        <span class="pt">初稿 最短3営業日</span>
+        <span class="pt">修正2回込み</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="video-service/#sample">2分の完成見本を見る</a>
+        <a class="btn secondary" href="video-service/">料金と制作工程を見る</a>
+      </div>
     </div>
-    <div class="actions">
-      <a class="btn primary" href="video-service/#sample">2分の完成見本を見る</a>
-      <a class="btn secondary" href="video-service/">料金と制作工程を見る</a>
-    </div>
+    <figure class="hero-visual">
+      <img src="video-service/img/shot-step1.jpg" width="1600" height="900" alt="経費精算マニュアル動画で領収書の条件を説明する画面">
+      <figcaption>原稿から制作した、2分08秒の社内マニュアル動画</figcaption>
+    </figure>
   </div>
 </header>
 
@@ -150,6 +183,30 @@ h1,h2,h3{font-style:normal;overflow-wrap:anywhere;min-width:0}
     <div class="item"><b>読み・文字・字幕・音量を検品</b><span>正常に再生できるだけでは納品しません</span></div>
   </div>
 </aside>
+
+<section class="case" aria-labelledby="case-title">
+  <div class="wrap">
+    <div class="case-head">
+      <div><span class="case-kicker">FICTIONAL CASE 01</span><h2 id="case-title">経費精算の説明を、担当者の口頭対応から動画へ。</h2></div>
+      <span class="fiction">架空の導入ケース</span>
+    </div>
+    <div class="case-grid">
+      <figure class="case-visual">
+        <img src="video-service/img/shot-step3.jpg" width="1600" height="900" alt="経費精算の締め切りと問い合わせ先を説明する動画画面">
+        <figcaption>制作物：2分08秒 ／ MP4 1920×1080 ／ 字幕データ付き</figcaption>
+      </figure>
+      <div>
+        <dl class="change-list">
+          <div class="change"><dt>想定課題</dt><dd>入社時や締め日前に、担当者が同じ手順を何度も説明している。説明する人によって内容も少しずつ違う。</dd></div>
+          <div class="change"><dt>制作したもの</dt><dd><strong>領収書、申請手順、締め切り、例外対応</strong>を2分08秒に整理。ナレーション・スライド・字幕を同じ原稿から制作。</dd></div>
+          <div class="change"><dt>想定される変化</dt><dd>最初の説明を動画へ置き換え、質問がある人だけ個別対応する形にする。手順変更時は原稿を直して同じ体裁で更新できる。</dd></div>
+          <div class="change"><dt>検品</dt><dd>社名・専門語の読み、文字化け、字幕と音声のずれ、動画ごとの音量差を納品前に確認。</dd></div>
+        </dl>
+        <p class="case-note">※実在企業の導入実績ではありません。想定課題と効果を明示した自主制作ケースです。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="works" id="works">
   <div class="wrap">
